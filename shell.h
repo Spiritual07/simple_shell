@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void c_print(const char *str);
+void c_print(char *str);
+int _strlen(char *s);
 
 #endif
