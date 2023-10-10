@@ -36,3 +36,36 @@ char *_strdup(char *str)
 	}
 	return (cpy); /* return duplicate string */
 }
+
+/**
+ * _atoi - function that converts string to an integer
+ * @str: Number of string to be converted
+ * Return: integer from the conversion
+ */
+
+int _atoi(char *str)
+{
+	int sign = 1, x;
+	unsigned int num_val = 0;
+	char null_flag = 0;
+
+	for (x = 0; str[x] != '\0'; x++)
+	{
+		if (str[x] == '-')
+			sign = sign * -1;
+
+		if (str[x] >= '0' && str[x] <= '9')
+		{
+			null_flag = 1;
+			num_val = num_val * 10 + (str[x] - '0');
+		}
+
+		else if (null_flag)
+			break;
+	}
+
+	if (sign < 0)
+		num_val = (-num_val);
+
+	return (num_val);
+}

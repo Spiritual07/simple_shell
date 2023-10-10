@@ -105,7 +105,7 @@ int handle_abs_path(char **command, char *f_path, size_t f_path_size)
  * @f_path: a character buffer to store the full path of the executable.
  */
 
-void execute_com(char **command, char **environ, char *f_path, char *argv[])
+void execute_com(char **command, char **environ, char *f_path)
 {
 	int stat_loc;
 	pid_t child_pid = fork();
@@ -119,7 +119,7 @@ void execute_com(char **command, char **environ, char *f_path, char *argv[])
 	{
 		if (execve(f_path, command, environ) == -1)
 		{
-			fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command[0]);
+			perror(command[0]);
 			exit(EXIT_FAILURE);
 		}
 	}

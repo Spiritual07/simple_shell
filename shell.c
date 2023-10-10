@@ -41,14 +41,15 @@ void handle_env_command(char **env)
 }
 
 /**
- * handle_exit_command - Function to handle exit command
+ * handle_exit_com - Function to handle exit command
  * @input: Pointer that will be used to store the user input.
  * @command: An array of strings representing the command and its arguments.
  * @inputFile:  A pointer to a FILE object, representing the input
  * file from which the function will read lines of text.
+ * @status: number to exit with
  */
 
-void handle_exit_command(char *input, char **command, FILE *inputFile)
+void handle_exit_com(char *input, char **command, FILE *inputFile, int status)
 {
 	free(input);
 	free(command);
@@ -56,7 +57,7 @@ void handle_exit_command(char *input, char **command, FILE *inputFile)
 	{
 		fclose(inputFile);
 	}
-	exit(EXIT_SUCCESS);
+	exit(status);
 }
 
 /**
@@ -73,6 +74,7 @@ int main(int argc, char *argv[], char **env)
 	char **command;
 	char *input = NULL;
 	size_t len = 0;
+	int status;
 
 	while (argc == 1)
 	{
@@ -92,8 +94,11 @@ int main(int argc, char *argv[], char **env)
 			continue;
 		}
 		if (_strcmp(command[0], "exit") == 0)
-			handle_exit_command(input, command, inputFile);
-		executeCommand(command, env, argv);
+		{
+			status = command[1] ? _atoi(command[1]) : EXIT_SUCCESS;
+			handle_exit_com(input, command, inputFile, status);
+		}
+		executeCommand(command, env);
 		free(input);
 		free(command);
 		input = NULL;
