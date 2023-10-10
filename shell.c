@@ -34,8 +34,11 @@ void handle_env_command(char **env)
 
 	while (env[x])
 	{
-		write(STDOUT_FILENO, env[x], _strlen(env[x]));
-		write(STDOUT_FILENO, "\n", 1);
+		if (env[x][0] != '_')
+		{
+			write(STDOUT_FILENO, env[x], _strlen(env[x]));
+			write(STDOUT_FILENO, "\n", 1);
+		}
 		x++;
 	}
 }
@@ -99,8 +102,8 @@ int main(int argc, char *argv[], char **env)
 			handle_exit_com(input, command, inputFile, status);
 		}
 		executeCommand(command, env);
-		free(input);
 		free(command);
+		free(input);
 		input = NULL;
 		command = NULL;
 		if (inputFile != stdin && feof(inputFile))

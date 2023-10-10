@@ -103,8 +103,7 @@ void executeCommand(char **command, char **environ)
 	if (!command_found)
 	{
 		perror(command[0]);
-		exit(EXIT_FAILURE);
+		return;
 	}
 	execute_com(command, environ, f_path);
 }
-

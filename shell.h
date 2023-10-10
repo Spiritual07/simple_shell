@@ -31,7 +31,6 @@ int handle_abs_path(char **command, char *f_path, size_t f_path_size);
 int search_path_dirs(char **command, char *f_path, size_t f_path_size);
 int check_cwd(char **command, char *f_path, size_t f_path_size);
 
-
 char *processInput(size_t *len, FILE *inputFile);
 char **tokenize(char *input);
 
