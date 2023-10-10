@@ -34,12 +34,9 @@ void handle_env_command(char **env)
 
 	while (env[x])
 	{
-		if (env[x][0] != '_')
-		{
 			write(STDOUT_FILENO, env[x], _strlen(env[x]));
 			write(STDOUT_FILENO, "\n", 1);
-		}
-		x++;
+			x++;
 	}
 }
 
@@ -82,7 +79,7 @@ int main(int argc, char *argv[], char **env)
 	while (argc == 1)
 	{
 		if (isatty(STDIN_FILENO))
-			c_print("$ ");
+			c_print("cisfun($) ");
 		input = processInput(&len, inputFile);
 		command = tokenize(input);
 		if (command == NULL)
