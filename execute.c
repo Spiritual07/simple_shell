@@ -16,8 +16,8 @@ int check_cwd(char **command, char *f_path, size_t f_path_size)
 	/* Check the current working directory first */
 	if (getcwd(f_path, f_path_size) != NULL)
 	{
-		_strncat(f_path, "/", f_path_size - strlen(f_path) - 1);
-		_strncat(f_path, command[0], f_path_size - strlen(f_path) - 1);
+		_strncat(f_path, "/", f_path_size - _strlen(f_path) - 1);
+		_strncat(f_path, command[0], f_path_size - _strlen(f_path) - 1);
 
 		/* If the file exists and is executable, run it */
 		access_result = access(f_path, X_OK);
@@ -56,8 +56,8 @@ int search_path_dirs(char **command, char *f_path, size_t f_path_size)
 	{
 		_strncpy(f_path, dir, f_path_size - 1);
 		f_path[f_path_size - 1] = '\0';
-		_strncat(f_path, "/", f_path_size - strlen(f_path) - 1);
-		_strncat(f_path, command[0], f_path_size - strlen(f_path) - 1);
+		_strncat(f_path, "/", f_path_size - _strlen(f_path) - 1);
+		_strncat(f_path, command[0], f_path_size - _strlen(f_path) - 1);
 
 		/* If the file exists and is executable, run it */
 		access_result = access(f_path, X_OK);
@@ -105,7 +105,7 @@ int handle_abs_path(char **command, char *f_path, size_t f_path_size)
  * @f_path: a character buffer to store the full path of the executable.
  */
 
-void execute_com(char **command, char **environ, char *f_path)
+void execute_com(char **command, char **environ, char *f_path, char *argv[])
 {
 	int stat_loc;
 	pid_t child_pid = fork();
@@ -119,7 +119,7 @@ void execute_com(char **command, char **environ, char *f_path)
 	{
 		if (execve(f_path, command, environ) == -1)
 		{
-			perror(command[0]);
+			fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command[0]);
 			exit(EXIT_FAILURE);
 		}
 	}

@@ -80,7 +80,7 @@ char **tokenize(char *input)
  */
 
 
-void executeCommand(char **command, char **environ)
+void executeCommand(char **command, char **environ, char *argv[])
 {
 	char f_path[255];
 	size_t f_path_size = sizeof(f_path);
@@ -102,9 +102,9 @@ void executeCommand(char **command, char **environ)
 	/* Check if the command exists before calling fork() */
 	if (!command_found)
 	{
-		perror(command[0]);
+		fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command[0]);
 		return;
 	}
-	execute_com(command, environ, f_path);
+	execute_com(command, environ, f_path, argv);
 }
 

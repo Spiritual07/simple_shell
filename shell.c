@@ -93,7 +93,7 @@ int main(int argc, char *argv[], char **env)
 		}
 		if (_strcmp(command[0], "exit") == 0)
 			handle_exit_command(input, command, inputFile);
-		executeCommand(command, env);
+		executeCommand(command, env, argv);
 		free(input);
 		free(command);
 		input = NULL;
