@@ -57,7 +57,7 @@ char **tokenize(char *input)
 		if (index >= size)
 		{
 			size = size + size;
-			temp = realloc(command, sizeof(char *) * size);
+			temp = _realloc(command, sizeof(char *) * size);
 			if (temp == NULL)
 			{
 				free(command);

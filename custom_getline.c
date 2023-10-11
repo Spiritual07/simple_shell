@@ -22,7 +22,7 @@ void _readLine(char **lineptr, size_t *buf_size, char *buffer, size_t len)
 	else if (*buf_size < len)
 	{
 		*buf_size = len > INIT_BUFSIZE ? len : INIT_BUFSIZE;
-		*lineptr = realloc(*lineptr, *buf_size * sizeof(char));
+		*lineptr = _realloc(*lineptr, *buf_size * sizeof(char));
 		if (*lineptr == NULL)
 		{
 			perror("Unable to allocate buffer");

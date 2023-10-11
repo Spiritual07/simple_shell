@@ -23,9 +23,12 @@ char *_strncpy(char *dest, char *src, int n);
 int _strcmp(char *str1, char *str2);
 int _strcspn(char *str, char *reject);
 char *_strdup(char *str);
+char *_memcpy(char *dest, char *src, unsigned int n);
+
 int _atoi(char *str);
 void _readLine(char **lineptr, size_t *buf_size, char *buffer, size_t len);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
+void *_realloc(void *ptr, unsigned int new_size);
 
 FILE *open_input_file(int argc, char *argv[]);
 void handle_env_command(char **env);

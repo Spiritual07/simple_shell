@@ -69,3 +69,25 @@ int _atoi(char *str)
 
 	return (num_val);
 }
+
+/**
+ * _memcpy -  function that copies memory area.
+ * @dest: destination string to copy to
+ * @src: source string to copy from
+ * @n: number of bytes
+ * Return: pointer to dest
+ */
+
+char *_memcpy(char *dest, char *src, unsigned int n)
+{
+	char *p = dest;
+	unsigned int x;
+
+	for (x = 0; x < n; x++)
+	{
+		*dest = *src;
+		dest++;
+		src++;
+	}
+	return (p);
+}
