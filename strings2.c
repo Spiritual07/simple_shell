@@ -91,3 +91,34 @@ char *_memcpy(char *dest, char *src, unsigned int n)
 	}
 	return (p);
 }
+
+/**
+ * _itoa - Function that convert integer to string
+ * @n: input integer
+ * Return: Pointer to the converted string
+ */
+
+char *_itoa(unsigned int n)
+{
+	unsigned int n_copy = n;
+	int len = 0, x;
+	char *str;
+
+	while (n_copy > 0)
+	{
+		n_copy = n_copy / 10;
+		len++;
+	}
+	str = malloc((len + 1) * sizeof(char));
+	if (str == NULL)
+	{
+		return (NULL);
+	}
+	str[len] = '\0';
+	for (x = 0; len > 0; x++, len--)
+	{
+		str[x] = (n % 10) + '0';
+		n = n / 10;
+	}
+	return (str);
+}

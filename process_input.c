@@ -76,11 +76,12 @@ char **tokenize(char *input)
 /**
  * executeCommand - Function to execute the command parsed
  * @command: An array of strings representing the command and its arguments.
- * @environ: An array of strings representing the environment variables.
+ * @argv: An array of strings
+ * @argc: Argument count
  */
 
 
-void executeCommand(char **command, char **environ)
+void executeCommand(char **command, int argc, char *argv[])
 {
 	char f_path[MAX_PATH];
 	size_t f_path_size = sizeof(f_path);
@@ -102,8 +103,8 @@ void executeCommand(char **command, char **environ)
 	/* Check if the command exists before calling fork() */
 	if (!command_found)
 	{
-		perror(command[0]);
+		errorMsg(command[0], argc, argv);
 		return;
 	}
-	execute_com(command, environ, f_path);
+	execute_com(command, argc, f_path, argv);
 }

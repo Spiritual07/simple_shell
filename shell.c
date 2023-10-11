@@ -98,7 +98,7 @@ int main(int argc, char *argv[], char **env)
 			status = command[1] ? _atoi(command[1]) : EXIT_SUCCESS;
 			handle_exit_com(input, command, inputFile, status);
 		}
-		executeCommand(command, env);
+		executeCommand(command, argc, argv);
 		free(input);
 		free(command);
 		input = NULL;

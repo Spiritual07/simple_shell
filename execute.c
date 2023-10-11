@@ -101,11 +101,12 @@ int handle_abs_path(char **command, char *f_path, size_t f_path_size)
 /**
  * execute_com - Function to execute the command
  * @command: array of strings representing a command
- * @environ: An array of strings representing the environment variables.
+ * @argc: argument count
+ * @argv: Array of string of arguments entered
  * @f_path: a character buffer to store the full path of the executable.
  */
 
-void execute_com(char **command, char **environ, char *f_path)
+void execute_com(char **command, int argc, char *f_path, char *argv[])
 {
 	int stat_loc;
 	pid_t child_pid = fork();
@@ -119,7 +120,7 @@ void execute_com(char **command, char **environ, char *f_path)
 	{
 		if (execve(f_path, command, environ) == -1)
 		{
-			perror(command[0]);
+			errorMsg(command[0], argc, argv);
 			exit(EXIT_FAILURE);
 		}
 	}
