@@ -28,12 +28,13 @@ int _strcmp(char *str1, char *str2);
 int _strcspn(char *str, char *reject);
 char *_strdup(char *str);
 char *_memcpy(char *dest, char *src, unsigned int n);
-
+char *_strchr(char *s, char c);
 int _atoi(char *str);
 char *_itoa(unsigned int n);
 void _readLine(char **lineptr, size_t *buf_size, char *buffer, size_t len);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 void *_realloc(void *ptr, unsigned int new_size);
+char *c_strtok(char *str, const char *delim);
 
 FILE *open_input_file(int argc, char *argv[]);
 void handle_env_command(char **env);
@@ -46,6 +47,5 @@ int check_cwd(char **command, char *f_path, size_t f_path_size);
 
 char *processInput(size_t *len, FILE *inputFile);
 char **tokenize(char *input);
-B
 
 #endif
