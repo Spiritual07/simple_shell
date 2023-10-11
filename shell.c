@@ -34,9 +34,9 @@ void handle_env_command(char **env)
 
 	while (env[x])
 	{
-			write(STDOUT_FILENO, env[x], _strlen(env[x]));
-			write(STDOUT_FILENO, "\n", 1);
-			x++;
+		write(STDOUT_FILENO, env[x], _strlen(env[x]));
+		write(STDOUT_FILENO, "\n", 1);
+		x++;
 	}
 }
 

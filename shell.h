@@ -8,9 +8,11 @@
 #include <sys/wait.h>
 #include <stddef.h>
 #include <signal.h>
+#include <errno.h>
 
 #define MAX_PATH 1024
-#define BUF_SIZE 2048
+#define INIT_BUFSIZE 32
+
 
 void c_print(char *str);
 
@@ -22,7 +24,8 @@ int _strcmp(char *str1, char *str2);
 int _strcspn(char *str, char *reject);
 char *_strdup(char *str);
 int _atoi(char *str);
-char *c_getline();
+void _readLine(char **lineptr, size_t *buf_size, char *buffer, size_t len);
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 
 FILE *open_input_file(int argc, char *argv[]);
 void handle_env_command(char **env);

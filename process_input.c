@@ -14,7 +14,7 @@ char *processInput(size_t *len, FILE *inputFile)
 	char *input = NULL;
 	ssize_t read;
 
-	read = getline(&input, len, inputFile);
+	read = _getline(&input, len, inputFile);
 	if (read == -1)
 	{
 		if (feof(inputFile))
