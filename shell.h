@@ -46,5 +46,6 @@ int check_cwd(char **command, char *f_path, size_t f_path_size);
 
 char *processInput(size_t *len, FILE *inputFile);
 char **tokenize(char *input);
+B
 
 #endif
