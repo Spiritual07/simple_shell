@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <stddef.h>
+#include <signal.h>
 
 #define MAX_PATH 1024
 

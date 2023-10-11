@@ -82,7 +82,7 @@ char **tokenize(char *input)
 
 void executeCommand(char **command, char **environ)
 {
-	char f_path[255];
+	char f_path[MAX_PATH];
 	size_t f_path_size = sizeof(f_path);
 	int command_found = 0;
 

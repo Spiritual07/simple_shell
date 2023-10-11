@@ -99,8 +99,8 @@ int main(int argc, char *argv[], char **env)
 			handle_exit_com(input, command, inputFile, status);
 		}
 		executeCommand(command, env);
-		free(command);
 		free(input);
+		free(command);
 		input = NULL;
 		command = NULL;
 		if (inputFile != stdin && feof(inputFile))
