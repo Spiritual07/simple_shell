@@ -111,6 +111,8 @@ void execute_com(char **command, int argc, char *f_path, char *argv[])
 	int stat_loc;
 	pid_t child_pid = fork();
 
+	(void)argc;
+	(void)argv;
 	if (child_pid < 0)
 	{
 		perror("fork failed");
@@ -120,7 +122,7 @@ void execute_com(char **command, int argc, char *f_path, char *argv[])
 	{
 		if (execve(f_path, command, environ) == -1)
 		{
-			errorMsg(command[0], argc, argv);
+			perror(command[0]);
 			exit(EXIT_FAILURE);
 		}
 	}
