@@ -10,22 +10,34 @@
 char *c_strtok(char *str, const char *delim)
 {
 	static char *f_input;
-	char *token = NULL;
+	char *token_start = NULL;
+	char *delim_pos = NULL;
 
 	if (str != NULL)
 		f_input = str;
 	if (f_input == NULL)
 		return (NULL);
-	token = f_input;
 
-	for (; *f_input != '\0'; f_input++)
+	/* Skip any leading delimiters */
+	f_input += _strspn(f_input, delim);
+	if (*f_input == '\0') /* Check if we have reached the end of the string */
 	{
-		if (_strchr(delim, *f_input) != NULL)
-		{
-			*f_input = '\0';
-			f_input++;
-			return (token);
-		}
+		f_input = NULL;
+		return (NULL);
 	}
-	return (token);
+
+	token_start = f_input;
+	delim_pos = _strpbrk(f_input, delim);
+
+	if (delim_pos != NULL)
+	{
+		*delim_pos = '\0';
+		f_input = delim_pos + 1;
+	}
+	else
+	{
+		f_input = (NULL);
+	}
+
+	return (token_start);
 }

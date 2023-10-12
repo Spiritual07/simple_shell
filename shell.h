@@ -35,6 +35,8 @@ void _readLine(char **lineptr, size_t *buf_size, char *buffer, size_t len);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 void *_realloc(void *ptr, unsigned int new_size);
 char *c_strtok(char *str, const char *delim);
+char *_strpbrk(char *str, const char *accept);
+unsigned int _strspn(char *str, const char *accept);
 
 FILE *open_input_file(int argc, char *argv[]);
 void handle_env_command(char **env);

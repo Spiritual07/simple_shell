@@ -20,3 +20,4 @@ void errorMsg(char *input, int count, char *av[])
 
 	free(msg);
 }
+

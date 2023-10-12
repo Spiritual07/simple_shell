@@ -55,7 +55,6 @@ char *_strncat(char *dest, char *src, int n)
  * Return: dest
  */
 
-OB
 char *_strncpy(char *dest, char *src, int n)
 {
 	int x;
@@ -89,7 +88,7 @@ int _strcmp(char *str1, char *str2)
 		{
 			return (*str1 - *str2);
 		}
-		str1++, str2++;OA
+		str1++, str2++;
 	}
 	return (*str1 - *str2);
 }
@@ -136,5 +135,4 @@ int _strlen(char *str)
 		count++;
 	}
 	return (count);
-	OB
 }

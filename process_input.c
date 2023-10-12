@@ -42,7 +42,7 @@ char **tokenize(char *input)
 {
 	size_t size = 8;
 	char **command, **temp;
-	char *delim = " ", *parsed;
+	char *delim = " \t\r\n\a", *parsed;
 	size_t index = 0;
 
 	command = malloc(sizeof(char *) * size);
@@ -51,7 +51,7 @@ char **tokenize(char *input)
 		perror("Memory allocation failed");
 		exit(EXIT_FAILURE);
 	}
-	parsed = strtok(input, delim);
+	parsed = c_strtok(input, delim);
 	while (parsed != NULL)
 	{
 		if (index >= size)
@@ -67,7 +67,7 @@ char **tokenize(char *input)
 			command = temp;
 		}
 		command[index++] = parsed;
-		parsed = strtok(NULL, delim);
+		parsed = c_strtok(NULL, delim);
 	}
 	command[index] = NULL;
 	return (command);
@@ -79,7 +79,6 @@ char **tokenize(char *input)
  * @argv: An array of strings
  * @argc: Argument count
  */
-
 
 void executeCommand(char **command, int argc, char *argv[])
 {
