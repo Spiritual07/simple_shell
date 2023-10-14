@@ -9,14 +9,20 @@
 #include <stddef.h>
 #include <signal.h>
 #include <errno.h>
+#include <stdbool.h>
 
 #define MAX_PATH 1024
 #define INIT_BUFSIZE 32
+#define BUFFERSIZE 1024
+#define TOK_DELIM " \t\r\n\a"
 
 extern char **environ;
 
 
+
+
 void c_print(char *str);
+int _putchar(char c);
 void errorMsg(char *input, int count, char *av[]);
 
 
@@ -33,21 +39,37 @@ int _atoi(char *str);
 char *_itoa(unsigned int n);
 void _readLine(char **lineptr, size_t *buf_size, char *buffer, size_t len);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
-void *_realloc(void *ptr, unsigned int new_size);
+void *_realloc(void *ptr, size_t oldSize, size_t newSize);
 char *c_strtok(char *str, const char *delim);
 char *_strpbrk(char *str, const char *accept);
 unsigned int _strspn(char *str, const char *accept);
+char *_strcat(char *dest, char *src);
 
 FILE *open_input_file(int argc, char *argv[]);
 void handle_env_command(char **env);
-void handle_exit_com(char *input, char **command, FILE *inputFile, int status);
-void executeCommand(char **command, int argc, char *argv[]);
-void execute_com(char **command, int argc, char *f_path, char *argv[]);
+void handle_exit_com(char *input, char **command, char **com_sep,
+				char *inputCopy, FILE *inputFile, int status);
+int executeCommand(char **command, int argc, char *argv[]);
+int execute_com(char **command, int argc, char *f_path, char *argv[]);
 int handle_abs_path(char **command, char *f_path, size_t f_path_size);
 int search_path_dirs(char **command, char *f_path, size_t f_path_size);
 int check_cwd(char **command, char *f_path, size_t f_path_size);
+int cd(char *pth);
+
+char *cd_home(void);
+void cd_to_dir(char *path, char *prev_dir);
+int cd_to_prev_dir(void);
+void update_pwd(void);
+int cd(char *path);
 
 char *processInput(size_t *len, FILE *inputFile);
-char **tokenize(char *input);
+char **tokenize(char *input, char *delim, bool splitCommands);
+int echo_com(char **command);
+int echo_arg(char **command, int lastComStat);
+int print_num(int n);
+void print_ui(unsigned int n);
+
+void handle_sigint(int sig);
+void free_memory(char *input, char **command, char **com_sep, char *inputCopy);
 
 #endif

@@ -51,7 +51,7 @@ int search_path_dirs(char **command, char *f_path, size_t f_path_size)
 		perror("Memory allocation failed");
 		exit(EXIT_FAILURE);
 	}
-	dir = strtok(path_copy, ":");
+	dir = c_strtok(path_copy, ":");
 	while (dir != NULL)
 	{
 		_strncpy(f_path, dir, f_path_size - 1);
@@ -66,7 +66,7 @@ int search_path_dirs(char **command, char *f_path, size_t f_path_size)
 			command_found = 1;
 			break;
 		}
-		dir = strtok(NULL, ":");
+		dir = c_strtok(NULL, ":");
 	}
 	free(path_copy); /* Free the copy of the PATH string */
 
@@ -104,9 +104,10 @@ int handle_abs_path(char **command, char *f_path, size_t f_path_size)
  * @argc: argument count
  * @argv: Array of string of arguments entered
  * @f_path: a character buffer to store the full path of the executable.
+ * Return: exit status
  */
 
-void execute_com(char **command, int argc, char *f_path, char *argv[])
+int execute_com(char **command, int argc, char *f_path, char *argv[])
 {
 	int stat_loc;
 	pid_t child_pid = fork();
@@ -122,6 +123,7 @@ void execute_com(char **command, int argc, char *f_path, char *argv[])
 	{
 		if (execve(f_path, command, environ) == -1)
 		{
+			free(command);
 			perror(command[0]);
 			exit(EXIT_FAILURE);
 		}
@@ -134,5 +136,9 @@ void execute_com(char **command, int argc, char *f_path, char *argv[])
 			exit(EXIT_FAILURE);
 		}
 	}
+	if (WIFEXITED(stat_loc))
+		return (WEXITSTATUS(stat_loc));
+	else
+		return (-1);
 }
 

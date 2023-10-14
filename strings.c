@@ -82,7 +82,7 @@ char *_strncpy(char *dest, char *src, int n)
 
 int _strcmp(char *str1, char *str2)
 {
-	while (*str1 & *str2)
+	while (*str1 && *str2)
 	{
 		if (*str1 != *str2)
 		{

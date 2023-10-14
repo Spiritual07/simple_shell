@@ -35,16 +35,19 @@ char *processInput(size_t *len, FILE *inputFile)
 /**
  * tokenize - function that tokenize input
  * @input: A string containing user input
+ * @delim: Delimiter to use to tokenization
+ * @splitCommands: Boolean expression to split commands
  * Return: pointers to the parsed tokens from the input string.
  */
 
-char **tokenize(char *input)
+char **tokenize(char *input, char *delim, bool splitCommands)
 {
 	size_t size = 8;
 	char **command, **temp;
-	char *delim = " \t\r\n\a", *parsed;
+	char *parsed;
 	size_t index = 0;
 
+	delim = splitCommands ? "|;" : TOK_DELIM;
 	command = malloc(sizeof(char *) * size);
 	if (command == NULL)
 	{
@@ -56,8 +59,7 @@ char **tokenize(char *input)
 	{
 		if (index >= size)
 		{
-			size = size + size;
-			temp = _realloc(command, sizeof(char *) * size);
+			temp = _realloc(command, size * sizeof(char *), sizeof(char *) * size * 2);
 			if (temp == NULL)
 			{
 				free(command);
@@ -78,13 +80,14 @@ char **tokenize(char *input)
  * @command: An array of strings representing the command and its arguments.
  * @argv: An array of strings
  * @argc: Argument count
+ * Return: exit status
  */
 
-void executeCommand(char **command, int argc, char *argv[])
+int executeCommand(char **command, int argc, char *argv[])
 {
 	char f_path[MAX_PATH];
 	size_t f_path_size = sizeof(f_path);
-	int command_found = 0;
+	int command_found = 0, status;
 
 	(void)argc;
 	(void)argv;
@@ -105,7 +108,9 @@ void executeCommand(char **command, int argc, char *argv[])
 	if (!command_found)
 	{
 		perror(command[0]);
-		return;
+		return (-1);
 	}
-	execute_com(command, argc, f_path, argv);
+	status = execute_com(command, argc, f_path, argv);
+
+	return (status);
 }

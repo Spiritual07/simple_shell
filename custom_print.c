@@ -13,15 +13,14 @@ void c_print(char *str)
 /**
  * _realloc - Function to reallocate memory
  * @ptr: A pointer to the existing memory block that you want to resize.
- * @newSize: n unsigned integer representing the
- * desired new size for the memory block.
+ * @newSize: Desired new size for the memory block.
+ * @oldSize: Old size of memory
  * Return: pointer to the new memory block
  */
 
-void *_realloc(void *ptr, unsigned int newSize)
+void *_realloc(void *ptr, size_t oldSize, size_t newSize)
 {
 	void *newptr;
-	size_t oldSize;
 
 	if (ptr == NULL)
 		return (malloc(newSize));
@@ -31,8 +30,7 @@ void *_realloc(void *ptr, unsigned int newSize)
 		free(ptr);
 		return (NULL);
 	}
-	/* Get the size of the old block of memory */
-	oldSize = *((size_t *)ptr - 1);
+
 	if (newSize == oldSize)
 		return (ptr);
 
@@ -47,4 +45,38 @@ void *_realloc(void *ptr, unsigned int newSize)
 
 	free(ptr);
 	return (newptr);
+}
+
+/**
+ * print_num - Function that prints an integer.
+ * @n: Integer to be print
+ * Return: Variable that keep track of character print count
+ */
+
+int print_num(int n)
+{
+	/* declare a varible to keep track of characters counts */
+	int x = 0;
+
+/* check if n is greater or equal to zero */
+	if (n >= 10)
+	/* call print_number function to print the remaining digits */
+	x = x + print_num(n / 10);
+
+	_putchar(n % 10 + '0'); /* print the last digit number */
+	x++; /* increament counter */
+
+	return (x);
+}
+
+/**
+ * _putchar - writes the character c to stdout
+ * @c: The character to print
+ *
+ * Return: On success 1.
+ * On error, -1 is returned, and err no is set appropriately.
+ */
+int _putchar(char c)
+{
+	return (write(1, &c, 1));
 }

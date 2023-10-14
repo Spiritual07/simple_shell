@@ -41,3 +41,70 @@ char *c_strtok(char *str, const char *delim)
 
 	return (token_start);
 }
+
+/**
+ * echo - Excute echo command
+ * @command: Input command
+ * Return: 0 (Succes)
+ */
+int echo(char **command)
+{
+	pid_t pid;
+	int stat_loc;
+
+	pid = fork();
+	if (pid < 0)
+	{
+		return (-1);
+	}
+	else if (pid == 0)
+	{
+		if (execve("/bin/echo", command, environ) == -1)
+		{
+			perror(command[0]);
+			return (-1);
+		}
+	}
+	else
+	{
+		waitpid(pid, &stat_loc, WUNTRACED);
+		while (!WIFEXITED(stat_loc) && !WIFSIGNALED(stat_loc))
+		{
+			waitpid(pid, &stat_loc, WUNTRACED);
+		}
+	}
+	return (0);
+}
+
+/**
+ * echo_arg - Excute cases where arguments are passed to echo
+ * @lastComStat:Status of the last command executed
+ * @command: Input command
+ * Return: 0 (success)
+ */
+int echo_arg(char **command, int lastComStat)
+{
+	char *path = NULL;
+	unsigned int  pid = getppid();
+
+	if (_strcmp(command[1], "$?") == 0)
+	{
+		print_num(lastComStat);
+		c_print("\n");
+	}
+	else if (_strcmp(command[1], "$$") == 0)
+	{
+		print_num(pid);
+		c_print("\n");
+	}
+	else if (_strcmp(command[1], "$PATH") == 0)
+	{
+		path = getenv("PATH");
+		c_print(path);
+		c_print("\n");
+	}
+	else
+		echo(command);
+
+	return (0);
+}

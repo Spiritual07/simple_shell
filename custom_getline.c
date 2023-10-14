@@ -22,7 +22,7 @@ void _readLine(char **lineptr, size_t *buf_size, char *buffer, size_t len)
 	else if (*buf_size < len)
 	{
 		*buf_size = len > INIT_BUFSIZE ? len : INIT_BUFSIZE;
-		*lineptr = _realloc(*lineptr, *buf_size * sizeof(char));
+		*lineptr = _realloc(*lineptr, len * sizeof(char), *buf_size * sizeof(char));
 		if (*lineptr == NULL)
 		{
 			perror("Unable to allocate buffer");
@@ -65,7 +65,7 @@ ssize_t _getline(char **lineptr, size_t *buf_size, FILE *stream)
 		if (len >= new_bufsize - 1) /* Leave space for '\0' */
 		{
 			new_bufsize = new_bufsize + new_bufsize;
-			buffer = realloc(buffer, new_bufsize * sizeof(char));
+			buffer = _realloc(buffer, len * sizeof(char), new_bufsize * sizeof(char));
 			if (buffer == NULL)
 			{
 				perror("Unable to reallocate buffer");
@@ -79,6 +79,7 @@ ssize_t _getline(char **lineptr, size_t *buf_size, FILE *stream)
 	if (c == EOF && len == 0) /* Nothing was read */
 	{
 		free(buffer);
+		buffer = NULL;
 		return (-1);
 	}
 	buffer[len] = '\0';
