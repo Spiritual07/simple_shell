@@ -86,3 +86,25 @@ ssize_t _getline(char **lineptr, size_t *buf_size, FILE *stream)
 	_readLine(lineptr, buf_size, buffer, len);
 	return (len);
 }
+
+/**
+ * _getenv - Function to retrieve the value of an
+ * environment variable given its name
+ * @name: Name of the environment variable
+ * Return: The value string
+ */
+
+char *_getenv(const char *name)
+{
+	int x;
+	size_t name_len = _strlen(name);
+
+	for (x = 0; environ[x] != NULL; x++)
+	{
+		if (_strncmp(name, environ[x], name_len) == 0 && environ[x][name_len] == '=')
+		{
+			return (&environ[x][name_len + 1]);
+		}
+	}
+	return (NULL);
+}

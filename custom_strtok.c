@@ -99,7 +99,7 @@ int echo_arg(char **command, int lastComStat)
 	}
 	else if (_strcmp(command[1], "$PATH") == 0)
 	{
-		path = getenv("PATH");
+		path = _getenv("PATH");
 		c_print(path);
 		c_print("\n");
 	}

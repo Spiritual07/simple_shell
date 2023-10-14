@@ -44,7 +44,7 @@ int search_path_dirs(char **command, char *f_path, size_t f_path_size)
 	char *path, *path_copy, *dir;
 	int access_result = -1;
 
-	path = getenv("PATH");
+	path = _getenv("PATH");
 	path_copy = _strdup(path); /* Create a copy of the PATH string */
 	if (path_copy == NULL)
 	{

@@ -126,7 +126,7 @@ int _strcspn(char *str, char *reject)
  * Return: integer (string length)
  */
 
-int _strlen(char *str)
+int _strlen(const char *str)
 {
 	int x, count = 0;
 

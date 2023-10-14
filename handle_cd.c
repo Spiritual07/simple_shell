@@ -10,7 +10,7 @@ char *cd_home(void)
 {
 	char *home;
 
-	home = getenv("HOME");
+	home = _getenv("HOME");
 	if (home == NULL)
 	{
 		perror("shell");
@@ -51,13 +51,13 @@ int cd_to_prev_dir(void)
 {
 	char cwd[BUFFERSIZE];
 
-	if (chdir(getenv("OLDPWD")) == -1)
+	if (chdir(_getenv("OLDPWD")) == -1)
 	{
 		perror("cd");
 		return (-1);
 	}
 	getcwd(cwd, sizeof(cwd));
-	setenv("OLDPWD", getenv("PWD"), 1);
+	setenv("OLDPWD", _getenv("PWD"), 1);
 	setenv("PWD", cwd, 1);
 
 	c_print(cwd);

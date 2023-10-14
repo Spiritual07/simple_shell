@@ -81,3 +81,29 @@ char *_strcat(char *dest, char *src)
 
 	return (p);
 }
+
+/**
+ * _strncmp - Function that compares n bytes of characrers of two strings
+ * @str1: Input string 1
+ * @str2: Input string 2
+ * @n: Number of bytes
+ * Return: 0 (success)
+ */
+
+int _strncmp(const char *str1, const char *str2, size_t n)
+{
+	while (n-- > 0)
+	{
+		if (*str1 != *str2)
+		{
+			return (*str1 - *str2);
+		}
+		else if (*str1 == '\0')
+		{
+			break;
+		}
+		str1++, str2++;
+	}
+	return (0);
+}
+

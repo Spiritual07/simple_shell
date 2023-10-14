@@ -70,7 +70,7 @@ void handle_exit_com(char *input, char **command, char **com_sep,
  * @env: An array of strings representing environment variables.
  * Return: 0 (success)
  */
-
+int main(int argc, char *argv[], char **env);
 int main(int argc, char *argv[], char **env)
 {
 	FILE *inputFile = open_input_file(argc, argv);

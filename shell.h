@@ -27,12 +27,13 @@ void errorMsg(char *input, int count, char *av[]);
 
 
 /* My custom string.h functions */
-int _strlen(char *str);
+int _strlen(const char *str);
 char *_strncat(char *dest, char *src, int n);
 char *_strncpy(char *dest, char *src, int n);
 int _strcmp(char *str1, char *str2);
 int _strcspn(char *str, char *reject);
 char *_strdup(char *str);
+int _strncmp(const char *str1, const char *str2, size_t n);
 char *_memcpy(char *dest, char *src, unsigned int n);
 char *_strchr(char *s, char c);
 int _atoi(char *str);
@@ -55,6 +56,7 @@ int handle_abs_path(char **command, char *f_path, size_t f_path_size);
 int search_path_dirs(char **command, char *f_path, size_t f_path_size);
 int check_cwd(char **command, char *f_path, size_t f_path_size);
 int cd(char *pth);
+char *_getenv(const char *name);
 
 char *cd_home(void);
 void cd_to_dir(char *path, char *prev_dir);
