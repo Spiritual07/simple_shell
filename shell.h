@@ -18,6 +18,39 @@
 
 extern char **environ;
 
+/**
+ * struct handle_builtin - structure for handling built-in commands it contains
+ * various fields for storing information about the command being executed
+ * @command: A pointer to an array of strings, where each string is a
+ * token from a command line input.
+ * @com_sep: A pointer to an array of strings, where each string is a
+ * separate command to be executed
+ * @input: A pointer to a string that contains the raw input from the user.
+ * @inputCopy: copy of input
+ * @inputFile: A pointer to a file from which input is being read.
+ * @status: A pointer to an integer that stores the exit status of
+ * the last command executed.
+ * @env: A pointer to an array of strings where each string is
+ * an environment variable
+ * @argc: The count of command line arguments passed to the program.
+ * @argv: A pointer to an array of strings, where each string
+ * is a command line argument.
+ */
+
+typedef struct handle_builtin
+{
+		char **command;
+		char **com_sep;
+		char *input;
+		char *inputCopy;
+		FILE *inputFile;
+		int *status;
+		char **env;
+		int argc;
+		char **argv;
+} handle_builtin;
+
+void handle_builtin_commands(handle_builtin *builtin);
 
 
 
@@ -73,5 +106,6 @@ void print_ui(unsigned int n);
 
 void handle_sigint(int sig);
 void free_memory(char *input, char **command, char **com_sep, char *inputCopy);
+void free_com(char **command);
 
 #endif

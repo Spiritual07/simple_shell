@@ -27,3 +27,14 @@ void free_memory(char *input, char **command, char **com_sep, char *inputCopy)
 		free(command);
 	}
 }
+
+/**
+ * free_com - Function to free command
+ * @command: commands to be freed
+ */
+
+void free_com(char **command)
+{
+	free(command);
+	command = NULL;
+}
