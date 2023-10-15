@@ -67,7 +67,7 @@ unsigned int _strspn(char *str, const char *accept)
  * Return: Pointer to resulting string dest.
  */
 
-char *_strcat(char *dest, char *src)
+char *_strcat(char *dest, const char *src)
 {
 	char *p = dest;
 
@@ -105,5 +105,25 @@ int _strncmp(const char *str1, const char *str2, size_t n)
 		str1++, str2++;
 	}
 	return (0);
+}
+
+/**
+ * _strcpy - function that copies the string pointed to
+ * by src, including the terminating null byte (\0),
+ * to the buffer pointed to by dest.
+ * @dest: destination of string
+ * @src: source of string
+ * Return: pointer to dest.
+ */
+
+char *_strcpy(char *dest, const char *src)
+{
+	char *p = dest;
+
+	while (*src)
+		*dest++ = *src++;
+	*dest = '\0';
+
+	return (p);
 }
 

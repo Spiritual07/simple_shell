@@ -125,20 +125,21 @@ char *_itoa(unsigned int n)
 
 /**
  * _strchr - this function locates a character in string
- * @s: the pointer
+ * @str: the pointer
  * @c: the character to locate
  * Return: S or NULL
  */
 
-char *_strchr(char *s, char c)
+char *_strchr(const char *str, char c)
 {
-	while (*s != '\0')
+	int x;
+
+	for (x = 0; str[x] != '\0'; x++)
 	{
-		if (*s == c)
-			return (s);
-		s++;
+		if (str[x] == c)
+			return ((char *) &str[x]);
 	}
-	if (*s == c)
-		return (s);
+	if (str[x] == c)
+		return ((char *) &str[x]);
 	return (NULL);
 }

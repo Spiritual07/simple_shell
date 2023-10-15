@@ -12,11 +12,11 @@ void free_memory(char *input, char **command, char **com_sep, char *inputCopy)
 {
 	if (input != NULL)
 	{
-    	free(input);
+		free(input);
 	}
 	if (inputCopy != NULL)
 	{
-    	free(inputCopy);
+		free(inputCopy);
 	}
 	if (com_sep != NULL)
 	{

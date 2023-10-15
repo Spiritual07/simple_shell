@@ -68,7 +68,7 @@ int _strcspn(char *str, char *reject);
 char *_strdup(char *str);
 int _strncmp(const char *str1, const char *str2, size_t n);
 char *_memcpy(char *dest, char *src, unsigned int n);
-char *_strchr(char *s, char c);
+char *_strchr(const char *s, char c);
 int _atoi(char *str);
 char *_itoa(unsigned int n);
 void _readLine(char **lineptr, size_t *buf_size, char *buffer, size_t len);
@@ -77,7 +77,8 @@ void *_realloc(void *ptr, size_t oldSize, size_t newSize);
 char *c_strtok(char *str, const char *delim);
 char *_strpbrk(char *str, const char *accept);
 unsigned int _strspn(char *str, const char *accept);
-char *_strcat(char *dest, char *src);
+char *_strcat(char *dest, const char *src);
+char *_strcpy(char *dest, const char *src);
 
 FILE *open_input_file(int argc, char *argv[]);
 void handle_env_command(char **env);
@@ -107,5 +108,11 @@ void print_ui(unsigned int n);
 void handle_sigint(int sig);
 void free_memory(char *input, char **command, char **com_sep, char *inputCopy);
 void free_com(char **command);
+void free_env(char **env);
+
+int update_env(const char *name, const char *value, int overwrite);
+int create_env(const char *name, const char *value);
+int _setenv(const char *name, const char *value, int overwrite);
+int _unsetenv(const char *name);
 
 #endif
