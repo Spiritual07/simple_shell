@@ -59,7 +59,6 @@ int _putchar(char c);
 void p_error(char *input, int count, char *av[]);
 
 
-/* My custom string.h functions */
 int _strlen(const char *str);
 char *_strncat(char *dest, char *src, int n);
 char *_strncpy(char *dest, char *src, int n);

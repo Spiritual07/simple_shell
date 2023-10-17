@@ -47,6 +47,7 @@ char *c_strtok(char *str, const char *delim)
  * @command: Input command
  * Return: 0 (Succes)
  */
+
 int echo(char **command)
 {
 	pid_t pid;
@@ -84,7 +85,7 @@ int echo(char **command)
  */
 int echo_arg(char **command, int lastComStat)
 {
-	char *path = NULL;
+	char *var_name, *var_val;
 	unsigned int  pid = getppid();
 
 	if (_strcmp(command[1], "$?") == 0)
@@ -97,11 +98,15 @@ int echo_arg(char **command, int lastComStat)
 		print_num(pid);
 		c_print("\n");
 	}
-	else if (_strcmp(command[1], "$PATH") == 0)
+	else if (command[1][0] == '$')
 	{
-		path = _getenv("PATH");
-		c_print(path);
-		c_print("\n");
+		var_name = command[1] + 1;
+		var_val = _getenv(var_name);
+		if (var_val != NULL)
+		{
+			c_print(var_val);
+			c_print("\n");
+		}
 	}
 	else
 		echo(command);
