@@ -31,10 +31,7 @@ void handle_builtin_commands(handle_builtin *B)
 		}
 		if (_strcmp(B->command[0], "exit") == 0)
 		{
-			if (B->command[1] != NULL)
-				*B->status = _atoi(B->command[1]);
-			else
-				*B->status = B->last_status;
+			*B->status = B->command[1] ? _atoi(B->command[1]) : B->last_status;
 			handle_exit_com(B->input, B->command, B->com_sep, B->inputCopy,
 							B->inputFile, *B->status);
 		}
@@ -87,6 +84,7 @@ int main(int argc, char *argv[], char **env)
 		builtin.inputCopy = inputCopy;
 		builtin.inputFile = inputFile;
 		builtin.status = &status;
+		builtin.last_status = 0;
 		builtin.env = env;
 		builtin.argc = argc;
 		builtin.argv = argv;
