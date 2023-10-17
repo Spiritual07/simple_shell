@@ -56,7 +56,7 @@ void handle_builtin_commands(handle_builtin *builtin);
 
 void c_print(char *str);
 int _putchar(char c);
-void errorMsg(char *input, int count, char *av[]);
+void p_error(char *input, int count, char *av[]);
 
 
 /* My custom string.h functions */
@@ -108,7 +108,6 @@ void print_ui(unsigned int n);
 void handle_sigint(int sig);
 void free_memory(char *input, char **command, char **com_sep, char *inputCopy);
 void free_com(char **command);
-void free_env(char **env);
 
 int update_env(const char *name, const char *value, int overwrite);
 int create_env(const char *name, const char *value);

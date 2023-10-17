@@ -1,13 +1,13 @@
 #include "shell.h"
 
 /**
- * errorMsg - Function to display error like original shell
+ * p_error - Function to display error like original shell
  * @input: User input
  * @count: loop counter
  * @av: Strings of arguments
  */
 
-void errorMsg(char *input, int count, char *av[])
+void p_error(char *input, int count, char *av[])
 {
 	char *msg = _itoa(count);
 

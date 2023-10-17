@@ -41,6 +41,7 @@ int update_env(const char *name, const char *value, int overwrite)
 			_strcat(new_name, "=");
 			_strcat(new_name, value);
 
+			free(environ[x]);
 			environ[x] = new_name;
 
 			return (0);
