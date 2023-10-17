@@ -32,7 +32,7 @@ void handle_builtin_commands(handle_builtin *B)
 		}
 		if (_strcmp(B->command[0], "exit") == 0)
 		{
-			*B->status = B->command[1] ? _atoi(B->command[1]) : EXIT_SUCCESS;
+			*B->status = B->command[1] ? _atoi(B->command[1]) : B->last_status;
 			handle_exit_com(B->input, B->command, B->com_sep, B->inputCopy,
 							B->inputFile, *B->status);
 		}
@@ -43,6 +43,7 @@ void handle_builtin_commands(handle_builtin *B)
 			continue;
 		}
 		*B->status = executeCommand(B->command, B->argc, B->argv);
+		B->last_status = *B->status;
 		free_com(B->command);
 	}
 }

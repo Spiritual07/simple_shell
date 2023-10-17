@@ -30,6 +30,7 @@ extern char **environ;
  * @inputFile: A pointer to a file from which input is being read.
  * @status: A pointer to an integer that stores the exit status of
  * the last command executed.
+ * @last_status: last command status without arguments.
  * @env: A pointer to an array of strings where each string is
  * an environment variable
  * @argc: The count of command line arguments passed to the program.
@@ -45,6 +46,7 @@ typedef struct handle_builtin
 		char *inputCopy;
 		FILE *inputFile;
 		int *status;
+		int last_status;
 		char **env;
 		int argc;
 		char **argv;
