@@ -14,8 +14,7 @@ void handle_builtin_commands(handle_builtin *B)
 		B->command = tokenize(B->com_sep[x], TOK_DELIM, false);
 		if (B->command == NULL || B->command[0] == NULL)
 		{
-			free(B->command);
-			B->command = NULL;
+			free_com(B->command);
 			continue;
 		}
 		if (_strcmp(B->command[0], "env") == 0)
@@ -32,7 +31,10 @@ void handle_builtin_commands(handle_builtin *B)
 		}
 		if (_strcmp(B->command[0], "exit") == 0)
 		{
-			*B->status = B->command[1] ? _atoi(B->command[1]) : B->last_status;
+			if (B->command[1] != NULL)
+				*B->status = _atoi(B->command[1]);
+			else
+				*B->status = B->last_status;
 			handle_exit_com(B->input, B->command, B->com_sep, B->inputCopy,
 							B->inputFile, *B->status);
 		}
