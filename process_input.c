@@ -89,8 +89,6 @@ int executeCommand(char **command, int argc, char *argv[])
 	size_t f_path_size = sizeof(f_path);
 	int command_found = 0, status;
 
-	(void)argc;
-	(void)argv;
 	command_found = check_cwd(command, f_path, f_path_size);
 
 	/* If the command is not an absolute path and it's not in the */
@@ -107,7 +105,7 @@ int executeCommand(char **command, int argc, char *argv[])
 	/* Check if the command exists before calling fork() */
 	if (!command_found)
 	{
-		perror(command[0]);
+		p_error(command[0], argc, argv);
 		return (-1);
 	}
 	status = execute_com(command, argc, f_path, argv);
