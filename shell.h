@@ -106,6 +106,7 @@ int echo_com(char **command);
 int echo_arg(char **command, int lastComStat);
 int print_num(int n);
 void print_ui(unsigned int n);
+int get_exit_stat(char **command, int last_com_stat);
 
 void handle_sigint(int sig);
 void free_memory(char *input, char **command, char **com_sep, char *inputCopy);

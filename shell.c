@@ -76,3 +76,43 @@ void handle_sigint(int sig)
 	}
 }
 
+/**
+ * get_exit_stat - Funtion to get exit status
+ * @command: array of command passed
+ * @last_com_stat: Last command status
+ * Return: last command status
+ */
+
+int get_exit_stat(char **command, int last_com_stat)
+{
+	int x = 1, status;
+	char *msg;
+
+	if (command[1])
+	{
+		status = _atoi(command[1]);
+		if (status < 0)
+		{
+			msg = _itoa(x);
+			_print("./hsh: ");
+			_print(msg);
+			_print(": ");
+			_print(command[0]);
+			_print(": ");
+			_print("Illegal number: ");
+			_print(command[1]);
+			_print("\n");
+			free(msg);
+			return (2);
+		}
+		else if (status > 255)
+		{
+			last_com_stat = status % 256;
+		}
+		else
+		{
+			return (status);
+		}
+	}
+	return (last_com_stat);
+}

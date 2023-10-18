@@ -31,7 +31,7 @@ void handle_builtin_commands(handle_builtin *B)
 		}
 		if (_strcmp(B->command[0], "exit") == 0)
 		{
-			*B->status = B->command[1] ? _atoi(B->command[1]) : EXIT_SUCCESS;
+			*B->status = get_exit_stat(B->command, *B->status);
 			handle_exit_com(B->input, B->command, B->com_sep, B->inputCopy,
 							B->inputFile, *B->status);
 		}
