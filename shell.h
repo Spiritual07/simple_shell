@@ -57,6 +57,7 @@ void handle_builtin_commands(handle_builtin *builtin);
 void c_print(char *str);
 int _putchar(char c);
 void p_error(char *input, int count, char *av[]);
+void print_error(char *path);
 
 
 int _strlen(const char *str);

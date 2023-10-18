@@ -68,7 +68,7 @@ int main(int argc, char *argv[], char **env)
 	while (argc)
 	{
 		if (isatty(STDIN_FILENO))
-			c_print("cisfun($) ");
+			c_print("cisfun$ ");
 		input = processInput(&len, inputFile);
 		if (_strlen(input) == 0)
 		{
@@ -76,7 +76,7 @@ int main(int argc, char *argv[], char **env)
 			continue;
 		}
 		inputCopy = _strdup(input);
-		com_sep = tokenize(inputCopy, ";", true);
+		com_sep = tokenize(inputCopy, ";||&&", true);
 		builtin.input = input;
 		builtin.command = command;
 		builtin.com_sep = com_sep;

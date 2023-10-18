@@ -14,7 +14,7 @@ char *cd_home(void)
 	if (home == NULL)
 	{
 		perror("shell");
-		exit(1);
+		return (NULL);
 	}
 	return (home);
 }
@@ -36,7 +36,7 @@ void cd_to_dir(char *path, char *prev_dir)
 		_strcat(cwd, path);
 		if (chdir(cwd) == -1)
 		{
-			perror("shell");
+			print_error(path);
 		}
 	}
 	getcwd(prev_dir, BUFFERSIZE);
@@ -50,8 +50,15 @@ void cd_to_dir(char *path, char *prev_dir)
 int cd_to_prev_dir(void)
 {
 	char cwd[BUFFERSIZE];
+	char *oldpwd;
 
-	if (chdir(_getenv("OLDPWD")) == -1)
+	oldpwd = _getenv("OLDPWD");
+	if (oldpwd == NULL)
+	{
+		perror("cd");
+		return (-1);
+	}
+	if (chdir(oldpwd) == -1)
 	{
 		perror("cd");
 		return (-1);

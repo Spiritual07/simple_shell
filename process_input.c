@@ -47,7 +47,7 @@ char **tokenize(char *input, char *delim, bool splitCommands)
 	char *parsed;
 	size_t index = 0;
 
-	delim = splitCommands ? ";" : TOK_DELIM;
+	delim = splitCommands ? ";||&&" : TOK_DELIM;
 	command = malloc(sizeof(char *) * size);
 	if (command == NULL)
 	{
