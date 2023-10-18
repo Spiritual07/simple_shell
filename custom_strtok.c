@@ -43,50 +43,16 @@ char *c_strtok(char *str, const char *delim)
 }
 
 /**
- * echo - Excute echo command
- * @command: Input command
- * Return: 0 (Succes)
- */
-
-int echo(char **command)
-{
-	pid_t pid;
-	int stat_loc;
-
-	pid = fork();
-	if (pid < 0)
-	{
-		return (-1);
-	}
-	else if (pid == 0)
-	{
-		if (execve("/bin/echo", command, environ) == -1)
-		{
-			perror(command[0]);
-			return (-1);
-		}
-	}
-	else
-	{
-		waitpid(pid, &stat_loc, WUNTRACED);
-		while (!WIFEXITED(stat_loc) && !WIFSIGNALED(stat_loc))
-		{
-			waitpid(pid, &stat_loc, WUNTRACED);
-		}
-	}
-	return (0);
-}
-
-/**
  * echo_arg - Excute cases where arguments are passed to echo
  * @lastComStat:Status of the last command executed
  * @command: Input command
  * Return: 0 (success)
  */
+
 int echo_arg(char **command, int lastComStat)
 {
-	char *var_name, *var_val;
 	unsigned int  pid = getppid();
+	char *var_name, *var_val, *error_msg;
 
 	if (_strcmp(command[1], "$?") == 0)
 	{
@@ -98,7 +64,7 @@ int echo_arg(char **command, int lastComStat)
 		print_num(pid);
 		c_print("\n");
 	}
-	else if (command[1][0] == '$')
+	else if (command[1][0] == '$' && command[1][1] != '\\')
 	{
 		var_name = command[1] + 1;
 		var_val = _getenv(var_name);
@@ -107,9 +73,21 @@ int echo_arg(char **command, int lastComStat)
 			c_print(var_val);
 			c_print("\n");
 		}
+		else
+		{
+			error_msg = "./hsh: 1: ";
+			c_print(error_msg);
+			c_print(var_name);
+			c_print(": not found");
+			c_print("\n");
+			return (1);
+		}
 	}
 	else
-		echo(command);
+	{
+		c_print(command[1]);
+		c_print("\n");
+	}
 
 	return (0);
 }
