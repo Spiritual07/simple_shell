@@ -27,6 +27,7 @@ char *processInput(size_t *len, FILE *inputFile)
 			exit(EXIT_FAILURE);
 		}
 	}
+	handle_comments(input);
 	input[_strcspn(input, "\n")] = 0;
 
 	return (input);
@@ -112,3 +113,20 @@ int executeCommand(char **command, int argc, char *argv[])
 
 	return (status);
 }
+
+/**
+ * handle_comments - Function that handle comments in a line of commands
+ * @str: the string to remove any comments that start with the # character
+ */
+
+void handle_comments(char *str)
+{
+	char *comment_start;
+
+	comment_start = _strchr(str, '#');
+	if (comment_start != NULL)
+	{
+		*comment_start = '\0';
+	}
+}
+

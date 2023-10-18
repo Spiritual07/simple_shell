@@ -97,6 +97,7 @@ void cd_to_dir(char *path, char *prev_dir);
 int cd_to_prev_dir(void);
 void update_pwd(void);
 int cd(char *path);
+void handle_comments(char *str);
 
 char *processInput(size_t *len, FILE *inputFile);
 char **tokenize(char *input, char *delim, bool splitCommands);
