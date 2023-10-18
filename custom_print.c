@@ -11,6 +11,16 @@ void c_print(char *str)
 }
 
 /**
+ * _print - function to print to standard error
+ * @str: string to print
+ */
+
+void _print(char *str)
+{
+	write(STDERR_FILENO, str, _strlen(str));
+}
+
+/**
  * _realloc - Function to reallocate memory
  * @ptr: A pointer to the existing memory block that you want to resize.
  * @newSize: Desired new size for the memory block.

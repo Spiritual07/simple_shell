@@ -107,7 +107,7 @@ int executeCommand(char **command, int argc, char *argv[])
 	if (!command_found)
 	{
 		p_error(command[0], argc, argv);
-		return (-1);
+		return (127);
 	}
 	status = execute_com(command, argc, f_path, argv);
 

@@ -11,12 +11,12 @@ void p_error(char *input, int count, char *av[])
 {
 	char *msg = _itoa(count);
 
-	c_print(av[0]);
-	c_print(": ");
-	c_print(msg);
-	c_print(": ");
-	c_print(input);
-	c_print(": not found\n");
+	_print(av[0]);
+	_print(": ");
+	_print(msg);
+	_print(": ");
+	_print(input);
+	_print(": not found\n");
 
 	free(msg);
 }
