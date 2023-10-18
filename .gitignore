@@ -3,3 +3,6 @@ execCom
 runchecker.bash
 Genius
 TEST_SUITE
+handle_env
+allowed_functions
+
